@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Funcionário</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+
+    <h2>Cadastrar Novo Funcionário</h2>
+    <form action="#" th:action="@{/funcionario/save}" th:object="${funcionario}" method="post">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
+            <label for="cargo">Cargo:</label>
+            <input type="text" id="cargo" th:field="*{cargo}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="responsavel">Responsável (ID do Animal):</label>
+            <select id="responsavel" th:field="*{responsavel}" class="form-control" required>
+                <option th:each="animal : ${animais}" th:value="${animal.id}" th:text="${animal.nome}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+    <br>
+    <a th:href="@{/}">Home</a><br>
+
+    <h2 class="mt-4">Funcionários Cadastrados</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Cargo</th>
+            <th>Responsável</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="funcionario : ${funcionarios}">
+            <td th:text="${funcionario.id}"></td>
+            <td th:text="${funcionario.nome}"></td>
+            <td th:text="${funcionario.cargo}"></td>
+            <td th:text="${funcionario.responsavel.nome}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

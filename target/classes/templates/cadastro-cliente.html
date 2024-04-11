@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Cliente</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+<h2 class="text-center">Cadastrar Novo Cliente</h2>
+<form action="#" th:action="@{/cliente/save}" th:object="${cliente}" method="post">
+    Nome: <input type="text" th:field="*{nome}" class="form-control"><br>
+    Telefone: <input type="text" th:field="*{telefone}" class="form-control"><br>
+    <input type="submit" value="Salvar" class="btn btn-primary">
+</form>
+<br>
+<a th:href="@{/}">Home</a><br>
+<h2 class="text-center">Clientes Cadastrados</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cliente : ${clientes}">
+        <td th:text="${cliente.id}"></td>
+        <td th:text="${cliente.nome}"></td>
+        <td th:text="${cliente.telefone}"></td>
+    </tr>
+    </tbody>
+</table>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Funcionário e Serviços</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h2>Selecionar Funcionário e Serviços</h2>
+    <form action="#" th:action="@{/servico/save}" method="post" th:object="${servico}">
+        <div class="form-group">
+            <label for="funcionario">Funcionário:</label>
+            <select id="funcionario" name="responsavel.id" class="form-control" required>
+                <option value="">Selecione um funcionário</option>
+                <option th:each="funcionario : ${funcionarios}" th:value="${funcionario.id}" th:text="${funcionario.id + ' - ' + funcionario.nome}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="servicos">Serviços:</label>
+            <select id="servicos" name="nome" class="form-control" multiple required>
+                <option value="Banho">Banho</option>
+                <option value="Tosa Higiênica">Tosa Higiênica</option>
+                <option value="Vacina">Vacina</option>
+                <option value="Corte de Unha">Corte de Unha</option>
+                <option value="Hidratação">Hidratação</option>
+                <option value="Desparasitação">Desparasitação</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+
+    <!-- Exibição dos dados salvos -->
+    <h2 class="mt-4">Funcionários e Serviços Cadastrados</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome do Funcionário</th>
+            <th>Serviço</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="servico : ${servicos}">
+            <td th:text="${servico.responsavel.id}"></td>
+            <td th:text="${servico.responsavel.nome}"></td>
+            <td th:text="${servico.nome}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/}">Home</a><br>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
